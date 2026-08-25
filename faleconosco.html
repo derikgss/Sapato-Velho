@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contato - Sapato Velho</title>
+<link rel="icon" href="logo/apenaslogo.png" sizes="512x512" type="imagem/png">
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#050505;
+    color:#fff;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    min-height:100vh;
+    border-left:1px solid #fff;
+    border-right:1px solid #fff;
+}
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 25px;
+    border-bottom:1px solid #251403;
+    flex-wrap:wrap;
+    gap:15px;
+    box-shadow:0 2px 15px rgba(0,0,0,0.4);
+    background:#6b4521
+    
+    
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    width:75px;
+    flex-shrink:0;
+}
+
+.logo img{
+    width:100%;
+    height:auto;
+    object-fit:contain;
+}
+
+.search{
+    display:flex;
+    align-items:center;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:30px;
+    overflow:hidden;
+    backdrop-filter:blur(6px);
+    transition:0.3s;
+}
+
+.search input{
+    width:220px;
+    padding:12px 18px;
+    border:none;
+    outline:none;
+    background:transparent;
+    color:#fff;
+    font-size:15px;
+}
+
+.search input::placeholder{
+    color:#ffffff34;
+}
+
+.search button{
+    width:40px;
+    height:40px;
+    border:none;
+    border-left:1px solid #fff;
+    background:transparent;
+    color:#fff;
+    cursor:pointer;
+}
+
+nav{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+nav a{
+    color:#fff;
+    text-decoration:none;
+    font-size:14px;
+    text-align:center;
+}
+
+.login-btn{
+    border:1px solid #fff;
+    padding:10px 18px;
+}
+
+.hero{
+    text-align:center;
+    padding:60px 25px;
+    border-bottom:1px solid #222;
+}
+
+.hero h1{
+    font-size:58px;
+    margin-bottom:20px;
+}
+
+.hero p{
+    color:#ccc;
+    line-height:1.7;
+    max-width:700px;
+    margin:auto;
+}
+
+.contact{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    padding:50px 25px;
+}
+
+.form-group{
+    margin-bottom:25px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:10px;
+    font-weight:bold;
+}
+
+.form-group input,
+.form-group textarea{
+    width:100%;
+    padding:14px;
+    border:1px solid #fff;
+    background:transparent;
+    color:#fff;
+    outline:none;
+}
+
+.form-group textarea{
+    height:160px;
+    resize:none;
+}
+
+.form button{
+    width:100%;
+    padding:16px;
+    border:1px solid #fff;
+    background:transparent;
+    color:#fff;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.form button:hover{
+    background:#fff;
+    color:#000;
+}
+
+.info{
+    border-left:1px solid #222;
+    padding-left:40px;
+}
+
+.info-box{
+    margin-bottom:35px;
+}
+
+.info-box h2{
+    font-size:26px;
+    margin-bottom:12px;
+}
+
+.info-box p{
+    color:#ccc;
+    line-height:1.7;
+}
+
+.map{
+    width:100%;
+    height:420px;
+    border:1px solid #fff;
+    overflow:hidden;
+}
+
+.map img{
+    width:100%;
+    height:100%;
+    object-fit:full;
+}
+
+footer{
+    padding:40px 25px;
+    border-top:1px solid #fff;
+    text-align:center;
+    color:#ccc;
+}
+
+.rodape{
+    background:#362210;
+    color:#fff;
+}
+
+@media (max-width:900px){
+
+header{
+    flex-direction:column;
+}
+
+.search{
+    width:100%;
+}
+
+.search input{
+    width:100%;
+}
+
+nav{
+    width:100%;
+    justify-content:space-between;
+}
+
+.hero h1{
+    font-size:42px;
+}
+
+.contact{
+    grid-template-columns:1fr;
+}
+
+.info{
+    border-left:none;
+    border-top:1px solid #222;
+    padding-left:0;
+    padding-top:40px;
+}
+
+footer{
+    padding:40px 25px;
+    border-top:1px solid #fff;
+    text-align:center;
+    color:#ccc;
+}
+
+.rodape{
+    background:#362210;
+    color:#fff;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+
+    <a href="main.html" class="logo">
+        <img src="logo/apenaslogo.png" alt="logocompleta">
+</a>
+
+    <div class="search">
+
+        <input type="text" placeholder="Pesquisar">
+
+        <button onclick="window.location.href='produtos.html'">
+            ⌕
+        </button>
+
+    </div>
+
+    <nav>
+        <a href="faleconosco.html">Fale<br>Conosco</a>
+        <a href="sobre.html">Sobre<br>nós</a>
+        <a href="login.html" class="login-btn">Entrar</a>
+        <a href="carrinho.html" class="carrinho">
+        <img src="logo/carrinho.png" width="65"> </a>
+    </nav>
+
+</header>
+
+<section class="hero">
+
+    <h1>Fale Conosco</h1>
+
+    <p>
+        Caso tenha dúvidas, sugestões ou problemas com pedidos,
+        nossa equipe está pronta para ajudar.
+    </p>
+
+</section>
+
+<section class="contact">
+
+<div class="form">
+
+    <div class="form-group">
+        <label>Nome*</label>
+        <input type="text">
+    </div>
+
+    <div class="form-group">
+        <label>E-mail*</label>
+        <input type="email">
+    </div>
+
+    <div class="form-group">
+        <label>Telefone*</label>
+        <input type="text">
+    </div>
+
+    <div class="form-group">
+        <label>Número do Pedido</label>
+        <input type="text">
+    </div>
+
+    <div class="form-group">
+        <label>Assunto*</label>
+        <textarea></textarea>
+    </div>
+
+    <button>Enviar</button>
+
+</div>
+
+<div class="info">
+
+    <div class="info-box">
+        <h2>Telefone para contato</h2>
+        <p>(11) 99467-4217</p>
+    </div>
+
+    <div class="info-box">
+        <h2>Localização</h2>
+        <p>
+            Estamos localizados na Av. Amazonas da Silva,
+            737, São Paulo, SP.
+        </p>
+    </div>
+
+    <div class="info-box">
+        <h2>Horário de funcionamento</h2>
+        <p>
+            Segunda à Sexta das 8h às 17h.
+            Fechado aos sábados, domingos e feriados.
+        </p>
+    </div>
+
+    <div class="map">
+        <img src="map.png" alt="Mapa">
+    </div>
+
+</div>
+
+</section>
+
+<footer class="rodape">
+    natan.maxwell@gmail.com
+    <br><br>
+    © 2026 Todos os direitos reservados.
+</footer>
+
+</div>
+
+</body>
+</html>

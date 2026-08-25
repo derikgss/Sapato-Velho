@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sapato Velho</title>
+<link rel="icon" href="logo/apenaslogo.png" sizes="512x512" type="imagem/png">
+<style>
+
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#050505;
+    color:#fff;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    min-height:100vh;
+    border-left:1px solid #fff;
+    border-right:1px solid #fff;
+}
+
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 25px;
+    border-bottom:1px solid #251403;
+    flex-wrap:wrap;
+    gap:15px;
+    box-shadow:0 2px 15px rgba(0,0,0,0.4);
+    background:#6b4521
+    
+    
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    width:75px;
+    flex-shrink:0;
+}
+
+.logo img{
+    width:100%;
+    height:auto;
+    object-fit:contain;
+}
+
+
+.titulo img{
+    width: 450px;
+    max-width: 100%;
+}
+
+.search{
+    display:flex;
+    align-items:center;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:30px;
+    overflow:hidden;
+    backdrop-filter:blur(6px);
+    transition:0.3s;
+}
+
+.search input{
+    width:220px;
+    padding:12px 18px;
+    border:none;
+    outline:none;
+    background:transparent;
+    color:#fff;
+    font-size:15px;
+}
+
+.search input::placeholder{
+    color:#ffffff34;
+}
+
+.search button{
+    width:40px;
+    height:40px;
+    border:none;
+    border-left:1px solid #fff;
+    background:transparent;
+    color:#fff;
+    cursor:pointer;
+}
+
+nav{
+    display:flex;
+    align-items:center;
+    gap:30px;
+}
+
+nav a{
+    color:#fff;
+    text-decoration:none;
+    font-size:14px;
+    text-align:center;
+}
+
+.login-btn{
+    border:1px solid #fff;
+    padding:12px 22px;
+}
+
+.hero{
+    text-align:center;
+    padding:90px 25px;
+    border-bottom:1px solid #222;
+}
+
+.hero h1{
+    font-size:58px;
+    margin-bottom:20px;
+}
+
+.hero p{
+    font-size:18px;
+    color:#ccc;
+    margin-bottom:35px;
+}
+
+.hero button{
+    padding:16px 30px;
+    background:transparent;
+    color:#fff;
+    border:1px solid #fff;
+    cursor:pointer;
+    font-size:16px;
+    transition:0.3s;
+}
+
+.hero button:hover{
+    background:#fff;
+    color:#000;
+}
+
+
+.section-title{
+    padding:50px 25px 20px;
+    font-size:42px;
+}
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    padding:0 25px 40px;
+}
+
+.card{
+    border:1px solid #2d2d2d;
+    padding:15px;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.image{
+    width:100%;
+    height:240px;
+    overflow:hidden;
+    border:1px solid #fff;
+    margin-bottom:15px;
+}
+
+.image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.info h3{
+    font-size:22px;
+    margin-bottom:10px;
+}
+
+.price{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.more{
+    display:flex;
+    justify-content:center;
+    padding-bottom:60px;
+}
+
+.more button{
+    padding:16px 28px;
+    background:transparent;
+    color:#fff;
+    border:1px solid #fff;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.more button:hover{
+    background:#fff;
+    color:#000;
+}
+
+.about{
+    padding:70px 25px;
+    border-top:1px solid #222;
+    text-align:center;
+}
+
+.about h2{
+    font-size:48px;
+    margin-bottom:25px;
+}
+
+.about p{
+    max-width:700px;
+    margin:auto;
+    line-height:1.8;
+    color:#ccc;
+    margin-bottom:35px;
+}
+
+.about button{
+    padding:16px 28px;
+    background:transparent;
+    color:#fff;
+    border:1px solid #fff;
+    cursor:pointer;
+}
+
+footer{
+    padding:40px 25px;
+    border-top:1px solid #fff;
+    text-align:center;
+    color:#ccc;
+}
+
+.rodape{
+    background:#362210;
+    color:#fff;
+}
+
+@media (max-width:900px){
+
+header{
+    flex-direction:column;
+}
+
+.search{
+    width:100%;
+}
+
+.search input{
+    width:100%;
+}
+
+nav{
+    width:100%;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.hero{
+    padding:60px 20px;
+}
+
+.hero h1{
+    font-size:42px;
+}
+
+.products{
+    grid-template-columns:1fr;
+}
+
+.section-title{
+    font-size:32px;
+}
+
+.about h2{
+    font-size:36px;
+}
+
+.carrinho{
+    font-size:40px;
+
+}
+
+.rodape{
+    background:#362210;
+    color:#fff;
+}
+
+}
+
+</style>
+</head>
+   
+<body>
+
+    <script>
+
+let logado = localStorage.getItem("logado");
+
+if(logado == "true"){
+
+    document.getElementById("area-login").innerHTML = "Perfil";
+
+    document.getElementById("area-login").href = "perfil.html";
+
+}
+
+</script>
+
+<div class="container">
+
+<header>
+
+<a class="logo">
+        <img src="logo/apenaslogo.png" alt="logocompleta">
+</a>
+
+    <div class="search">
+
+        <input type="text" placeholder="Pesquisar">
+
+        <a href="produtos.html">
+            <button>⌕</button>
+        </a>
+        
+    </div>
+
+    <nav>
+        <a href="faleconosco.html">Fale<br>Conosco</a>
+        <a href="sobre.html">Sobre<br>nós</a>
+        <a href="login.html" class="login-btn" id="area-login">Entrar</a>
+        <a href="carrinho.html" class="carrinho">
+        <img src="logo/carrinho.png" width="65"> </a>
+    </nav>
+
+</header>
+
+<section class="hero">
+    <h1 Class="titulo">
+        <img src="logo/escrita.png" alt="Sapato Velho">
+    </h1>
+    <p>Boas-vindas ao nosso WeBazar.</p>
+    <button>Venha dar uma olhada em nossos itens!</button>
+</section>
+
+<h2 class="section-title">Produtos em destaque</h2>
+
+<section class="products">
+
+    <div class="card">
+        <div class="image">
+            <img src="ProdutosImagens/snes.jpeg" alt="Console SNES">
+        </div>
+
+        <div class="info">
+            <h3>
+                <a href="snes.html">Console SNES</a>
+            </h3>
+
+            <div class="price">R$ 300</div>
+        </div>
+    </div>
+
+
+
+    <div class="card">
+        <div class="image">
+            <img src="ProdutosImagens/CssBook.jpeg" alt="Livro CSS na Web">
+        </div>
+
+        <div class="info">
+            <h3>
+                <a href="livro.html">Livro CSS na Web</a>
+            </h3>
+
+            <div class="price">R$ 20</div>
+        </div>
+    </div>
+
+
+
+    <div class="card">
+        <div class="image">
+            <img src="ProdutosImagens/CaixaFerramenta.png" alt="Caixa de Ferramentas">
+        </div>
+
+        <div class="info">
+            <h3>
+                <a href="caixa.html">Caixa de Ferramentas</a>
+            </h3>
+
+            <div class="price">R$ 35</div>
+        </div>
+    </div>
+
+
+
+    <div class="card">
+        <div class="image">
+            <img src="ProdutosImagens/Tenis.jpeg" alt="Allstar Preto">
+        </div>
+
+        <div class="info">
+            <h3>
+                <a href="tenis.html">Allstar Preto</a>
+            </h3>
+
+            <div class="price">R$ 70</div>
+        </div>
+    </div>
+
+</section>
+
+<section class="more">
+   
+	<a href="produtos.html" class="about-btn">
+        <button>Ver mais produtos</button>
+    </a>
+</section>
+
+<section class="about">
+
+    <h2>Sobre nós</h2>
+
+    <p>
+        Somos uma loja virtual focada em venda de produtos usados,
+        oferecendo variedade, economia e sustentabilidade.
+    </p>
+	
+    
+    <a href="sobre.html" class="about-btn">
+        <button>Saiba mais</button>
+    </a>
+
+</section>
+
+<footer class="rodape">
+    natan.maxwell@gmail.com
+    <br><br>
+    © 2026 Todos os direitos reservados.
+</footer>
+
+</div>
+
+</body>
+</html>

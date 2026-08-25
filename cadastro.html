@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Criar Conta - Sapato Velho</title>
+<link rel="icon" href="logo/apenaslogo.png" sizes="512x512" type="imagem/png">
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+
+body{
+    background:#050505;
+    color:#fff;
+}
+
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    min-height:100vh;
+    border-left:1px solid #fff;
+    border-right:1px solid #fff;
+}
+
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 25px;
+    border-bottom:1px solid #251403;
+    flex-wrap:wrap;
+    gap:15px;
+    box-shadow:0 2px 15px rgba(0,0,0,0.4);
+    background:#6b4521
+}
+
+
+.logo{
+    display:flex;
+    align-items:center;
+    width:75px;
+    flex-shrink:0;
+}
+
+
+.logo img{
+    width:100%;
+    height:auto;
+    object-fit:contain;
+}
+
+
+.search{
+    display:flex;
+    align-items:center;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:30px;
+    overflow:hidden;
+    backdrop-filter:blur(6px);
+    transition:0.3s;
+}
+
+
+.search input{
+    width:220px;
+    padding:12px 18px;
+    border:none;
+    outline:none;
+    background:transparent;
+    color:#fff;
+    font-size:15px;
+}
+
+
+.search input::placeholder{
+    color:#ffffff34;
+}
+
+
+.search button{
+    width:40px;
+    height:40px;
+    border:none;
+    border-left:1px solid #fff;
+    background:transparent;
+    color:#fff;
+    cursor:pointer;
+}
+
+
+nav{
+    display:flex;
+    align-items:center;
+    gap:30px;
+}
+
+
+nav a{
+    color:#fff;
+    text-decoration:none;
+    font-size:14px;
+    text-align:center;
+}
+
+
+.login-btn{
+    border:1px solid #fff;
+    padding:12px 22px;
+}
+
+
+main{
+    padding:70px 40px;
+}
+
+
+.page-title{
+    text-align:center;
+    font-size:58px;
+    margin-bottom:80px;
+}
+
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:120px;
+    max-width:900px;
+    margin:auto;
+}
+
+
+.form-column{
+    display:flex;
+    flex-direction:column;
+    gap:35px;
+}
+
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+
+.form-group label{
+    font-size:18px;
+}
+
+
+.form-group input{
+    height:42px;
+    border:1px solid #fff;
+    background:transparent;
+    color:#fff;
+    padding:10px;
+    outline:none;
+}
+
+
+.button-area{
+    display:flex;
+    justify-content:center;
+    margin-top:70px;
+}
+
+
+.button-area button{
+    padding:16px 28px;
+    border:1px solid #fff;
+    background:transparent;
+    color:#fff;
+    cursor:pointer;
+    font-size:16px;
+    border-radius:8px;
+    transition:0.3s;
+}
+
+
+.button-area button:hover{
+    background:#fff;
+    color:#000;
+}
+
+
+@media (max-width:768px){
+
+
+header{
+    flex-direction:column;
+}
+
+
+.search{
+    width:100%;
+}
+
+
+.search input{
+    width:100%;
+}
+
+
+nav{
+    width:100%;
+    justify-content:space-between;
+    gap:10px;
+}
+
+
+.page-title{
+    font-size:42px;
+    margin-bottom:50px;
+}
+
+
+.form-grid{
+    grid-template-columns:1fr;
+    gap:35px;
+}
+
+
+main{
+    padding:50px 25px;
+}
+
+
+}
+
+
+</style>
+</head>
+<body>
+    <script>
+function criarconta(){
+    let nome = document.getElementById("nome").value;
+    let nascimento = document.getElementById("nascimento").value;
+    let cpf = document.getElementById("cpf").value;
+    let email = document.getElementById("email").value;
+    let senha = document.getElementById("senha").value;
+    let endereco = document.getElementById("endereco").value;
+    let cep = document.getElementById("cep").value;
+    let cidade = document.getElementById("cidade").value;
+
+
+    if(
+        nome == "" ||
+        nascimento == "" ||
+        cpf == "" ||
+        email == "" ||
+        senha == "" ||
+        endereco == "" ||
+        cep == "" ||
+        cidade == ""
+    ){
+
+
+        alert("Preencha os seus dados");
+        return;
+
+
+    }
+
+
+    let usuario = {
+        nome,
+        nascimento,
+        cpf,
+        email,
+        senha,
+        endereco,
+        cep,
+        cidade
+    };
+
+
+    localStorage.setItem("usuario", JSON.stringify(usuario));
+
+
+    alert("Conta criada com sucesso!");
+
+
+    window.location.href = "login.html";
+
+
+}
+
+
+</script>
+<div class="container">
+<header>
+<a href="main.html" class="logo">LOGO
+    <img src="logo/apenaslogo.png" alt="logocompleta">
+</a>
+    <div class="search">
+
+
+        <input type="text" placeholder="Pesquisar">
+
+
+        <a href="produtos.html">
+            <button>⌕</button>
+        </a>
+    </div>
+
+
+    <nav>
+        <a href="faleconosco.html">Fale<br>Conosco</a>
+        <a href="sobre.html">Sobre<br>nós</a>
+        <a href="login.html" class="login-btn">Entrar</a>
+        <a href="carrinho.html" class="carrinho">
+        <img src="logo/carrinho.png" width="65"> </a>
+    </nav>
+
+
+</header>
+<main>
+<h1 class="page-title">Criar conta</h1>
+<form action="http://localhost:3000/cadastrar" method="POST">
+ <div class="form-grid">
+   
+    <div class="form-column">
+
+
+        <div class="form-group">
+            <label>Nome</label>
+            <input type="text" id="Nome" name="Nome" required><br><br>
+        </div>
+
+
+        <div class="form-group">
+            <label>Data de nascimento</label>
+            <input type="text" id="Datadenascimento" name="Datadenascimento" required><br><br>
+        </div>
+
+
+        <div class="form-group">
+            <label>CPF</label>
+            <input type="text" id="CPF" name="CPF" required><br><br>
+        </div>
+       
+        <div class="form-group">
+            <label>E-mail</label>
+            <input type="text" id="Email" name="Email" required><br><br>
+        </div>
+       
+        <div class="form-group">
+            <label>Senha</label>
+            <input type="text" id="Senha" name="Senha" required><br><br>
+        </div>
+
+
+    </div>
+
+
+   
+    <div class="form-column">
+
+
+        <div class="form-group">
+            <label>Endereço</label>
+            <input type="text" id="Endereco" name="Endereco" required><br><br>
+        </div>
+
+
+        <div class="form-group">
+            <label>CEP</label>
+            <input type="text" id="CEP" name="CEP" required><br><br>
+        </div>
+
+
+        <div class="form-group">
+            <label>Cidade</label>
+            <input type="text" id="Cidade" name="Cidade" required><br><br>
+        </div>
+
+
+    </div>
+
+
+ </div>
+
+
+ <div class="button-area">
+    <button type="">Criar conta</button>
+ </div>
+
+
+</form>
+</main>
+</div>
+</body>
+</html>

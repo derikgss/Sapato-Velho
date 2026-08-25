@@ -1,0 +1,21 @@
+
+CREATE DATABASE SapatoVelhoDB;
+GO
+
+
+USE SapatoVelhoDB;
+GO
+
+
+CREATE TABLE Usuarios (
+    ID INT IDENTITY(1,1) PRIMARY KEY,
+    Nome VARCHAR(150) NOT NULL,
+    DataNascimento VARCHAR(50),
+    CPF VARCHAR(20) NOT NULL,
+    Email VARCHAR(100) NOT NULL,
+    Senha VARCHAR(100) NOT NULL,
+    Endereco VARCHAR(200),
+    CEP VARCHAR(20),
+    Cidade VARCHAR(100)
+);
+GO

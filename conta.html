@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Minha Conta - Sapato Velho</title>
+
+<link rel="icon" href="logo/apenaslogo.png" sizes="512x512" type="imagem/png">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#050505;
+    color:#fff;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    min-height:100vh;
+    border-left:1px solid #fff;
+    border-right:1px solid #fff;
+}
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 25px;
+    border-bottom:1px solid #251403;
+    flex-wrap:wrap;
+    gap:15px;
+    box-shadow:0 2px 15px rgba(0,0,0,0.4);
+    background:#6b4521;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    width:75px;
+}
+
+.logo img{
+    width:100%;
+}
+
+.search{
+    display:flex;
+    align-items:center;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:30px;
+    overflow:hidden;
+}
+
+.search input{
+    width:220px;
+    padding:12px 18px;
+    border:none;
+    outline:none;
+    background:transparent;
+    color:#fff;
+}
+
+.search input::placeholder{
+    color:#ffffff34;
+}
+
+.search button{
+    width:40px;
+    height:40px;
+    border:none;
+    border-left:1px solid #fff;
+    background:transparent;
+    color:#fff;
+    cursor:pointer;
+}
+
+nav{
+    display:flex;
+    align-items:center;
+    gap:30px;
+}
+
+nav a{
+    color:#fff;
+    text-decoration:none;
+    font-size:14px;
+    text-align:center;
+}
+
+.login-btn{
+    border:1px solid #fff;
+    padding:12px 22px;
+}
+
+main{
+    padding:70px 25px;
+}
+
+.titulo{
+    text-align:center;
+    font-size:58px;
+    margin-bottom:70px;
+}
+
+.perfil{
+    max-width:700px;
+    margin:auto;
+    border:1px solid #2d2d2d;
+    padding:40px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    margin-bottom:30px;
+}
+
+.form-group label{
+    margin-bottom:10px;
+    font-size:18px;
+}
+
+.form-group input{
+    height:50px;
+    padding:12px;
+    background:transparent;
+    border:1px solid #fff;
+    color:#fff;
+    outline:none;
+}
+
+.button-area{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.button-area button{
+    flex:1;
+    min-width:200px;
+    padding:16px;
+    border:1px solid #fff;
+    background:transparent;
+    color:#fff;
+    cursor:pointer;
+    font-size:16px;
+    transition:0.3s;
+}
+
+.button-area button:hover{
+    background:#fff;
+    color:#000;
+}
+
+.delete-btn:hover{
+    background:#a30000 !important;
+    border-color:#a30000;
+    color:#fff !important;
+}
+
+footer{
+    padding:40px 25px;
+    border-top:1px solid #fff;
+    text-align:center;
+    background:#362210;
+    color:#fff;
+}
+
+@media (max-width:900px){
+
+header{
+    flex-direction:column;
+}
+
+.search{
+    width:100%;
+}
+
+.search input{
+    width:100%;
+}
+
+nav{
+    width:100%;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.titulo{
+    font-size:42px;
+}
+
+.perfil{
+    padding:30px 20px;
+}
+
+.button-area{
+    flex-direction:column;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+
+<a href="main.html" class="logo">
+    <img src="logo/apenaslogo.png">
+</a>
+
+<div class="search">
+
+    <input type="text" placeholder="Pesquisar">
+
+    <a href="produtos.html">
+        <button>⌕</button>
+    </a>
+
+</div>
+
+<nav>
+    <a href="faleconosco.html">Fale<br>Conosco</a>
+    <a href="sobre.html">Sobre<br>nós</a>
+    <a href="perfil.html" class="login-btn">Minha Conta</a>
+    <a href="carrinho.html">
+    <img src="logo/carrinho.png" width="65">
+    </a>
+</nav>
+
+</header>
+
+<main>
+
+<h1 class="titulo">Minha Conta</h1>
+
+<div class="perfil">
+
+    <div class="form-group">
+        <label>Nome</label>
+        <input type="text" id="nome">
+    </div>
+
+    <div class="form-group">
+        <label>E-mail</label>
+        <input type="email" id="email">
+    </div>
+
+    <div class="form-group">
+        <label>Senha</label>
+        <input type="password" id="senha">
+    </div>
+
+    <div class="button-area">
+
+        <button onclick="salvarAlteracoes()">
+            Salvar alterações
+        </button>
+
+        <button class="delete-btn" onclick="excluirConta()">
+            Excluir conta
+        </button>
+
+    </div>
+
+</div>
+
+</main>
+
+<footer>
+
+    natan.maxwell@gmail.com
+
+    <br><br>
+
+    © 2026 Todos os direitos reservados.
+
+</footer>
+
+</div>
+
+<script>
+
+let usuario = JSON.parse(localStorage.getItem("usuario"));
+
+if(usuario){
+
+    document.getElementById("nome").value = usuario.nome;
+    document.getElementById("email").value = usuario.email;
+    document.getElementById("senha").value = usuario.senha;
+
+}
+
+function salvarAlteracoes(){
+
+    usuario.nome = document.getElementById("nome").value;
+    usuario.email = document.getElementById("email").value;
+    usuario.senha = document.getElementById("senha").value;
+
+    localStorage.setItem("usuario", JSON.stringify(usuario));
+
+    alert("Dados atualizados com sucesso!");
+
+}
+
+function excluirConta(){
+
+    let confirmar = confirm("Deseja excluir sua conta?");
+
+    if(confirmar){
+
+        localStorage.removeItem("usuario");
+
+        alert("Conta excluída!");
+
+        window.location.href = "index.html";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
