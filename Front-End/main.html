@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sapato Velho</title>
+<link rel="icon" href="../img/layout/apenaslogo.png" sizes="512x512" type="imagem/png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+   
+<body class="page-main" data-theme="dark">
+
+<div class="container">
+
+<header>
+
+<a class="logo">
+        <img src="img/layout/apenaslogo.png" alt="logocompleta">
+</a>
+
+    <div class="search">
+
+        <input type="text" id="barraPesquisa" placeholder="Pesquisar">
+
+        <a href="produtos.html">
+            <button id="botaopesquisa">⌕</button>
+        </a>
+        
+    </div>
+
+    <nav>
+        <a href="faleconosco.html">Fale<br>Conosco</a>
+        <a href="sobre.html">Sobre<br>nós</a>
+        <a href="login.html" class="login-btn" id="area-login">Entrar</a>
+        <a href="carrinho.html" class="carrinho carrinho-indicador">
+        <img id="imagemCarrinho"
+             src="img/layout/carrinho.png"
+             data-vazio="img/layout/carrinho.png"
+             data-cheio="img/layout/carrinho-cheio.png"
+             width="65"
+             alt="Carrinho vazio">
+        <span id="contadorCarrinho" class="contador-carrinho">0</span>
+    </a>
+    </nav>
+
+</header>
+
+<section class="hero">
+    <h1 Class="titulo">
+        <img src="img/layout/escrita.png" alt="Sapato Velho">
+    </h1>
+    <p>Boas-vindas ao nosso WeBazar.</p>
+    <a href="produtos.html">
+    <button>Venha dar uma olhada em nossos itens!</button>
+    </a>
+</section>
+
+<h2 class="section-title">Produtos em destaque</h2>
+
+<section class="products">
+
+    <div class="card" data-produto="snes">
+        <div class="image">
+            <img src="img/produtos/snes.jpeg" alt="Console SNES">
+        </div>
+
+        <div class="info">
+            <h3>
+                <a href="produtos/snes.html">Console SNES</a>
+            </h3>
+
+            <div class="price">R$ 300</div>
+        </div>
+    </div>
+
+
+
+    <div class="card" data-produto="livro-css">
+        <div class="image">
+            <img src="img/produtos/cssbook.jpeg" alt="Livro CSS na Web">
+        </div>
+
+        <div class="info">
+            <h3>
+                <a href="produtos/livro.html">Livro CSS na Web</a>
+            </h3>
+
+            <div class="price">R$ 20</div>
+        </div>
+    </div>
+
+
+
+    <div class="card" data-produto="caixa-ferramenta">
+        <div class="image">
+            <img src="img/produtos/CaixaFerramenta1.png" alt="Caixa de Ferramentas">
+        </div>
+
+        <div class="info">
+            <h3>
+                <a href="produtos/caixa.html">Caixa de Ferramentas</a>
+            </h3>
+
+            <div class="price">R$ 35</div>
+        </div>
+    </div>
+
+
+
+    <div class="card" data-produto="tenis">
+        <div class="image">
+            <img src="img/produtos/tenis.jpeg" alt="Allstar Preto">
+        </div>
+
+        <div class="info">
+            <h3>
+                <a href="produtos/tenis.html">Allstar Preto</a>
+            </h3>
+
+            <div class="price">R$ 70</div>
+        </div>
+    </div>
+
+</section>
+
+<section class="more">
+   
+	<a href="produtos.html" class="about-btn">
+        <button>Ver mais produtos</button>
+    </a>
+</section>
+x
+<section class="about">
+
+    <h2>Sobre nós</h2>
+
+    <p>
+        Somos uma loja virtual focada em venda de produtos usados,
+        oferecendo variedade, economia e sustentabilidade.
+    </p>
+	
+    
+    <a href="sobre.html" class="about-btn">
+        <button>Saiba mais</button>
+    </a>
+
+</section>
+
+<footer class="rodape">
+    Sapato Velho
+    <br><br>
+    © 2026 Todos os direitos reservados.
+</footer>
+
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/carrinho.js"></script>
+<script src="js/pesquisa.js"></script>
+</body>
+</html>

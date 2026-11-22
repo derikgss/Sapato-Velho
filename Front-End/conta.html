@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Minha Conta - Sapato Velho</title>
+
+<link rel="icon" href="img/layout/apenaslogo.png" sizes="512x512" type="imagem/png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="page-conta" data-theme="dark">
+
+<div class="container">
+
+<header>
+
+<a href="main.html" class="logo">
+    <img src="img/layout/apenaslogo.png">
+</a>
+
+<div class="search">
+
+    <input type="text" placeholder="Pesquisar">
+
+    <a href="produtos.html">
+        <button>⌕</button>
+    </a>
+
+</div>
+
+<nav>
+    <a href="faleconosco.html">Fale<br>Conosco</a>
+    <a href="sobre.html">Sobre<br>nós</a>
+    <a href="conta.html" class="login-btn">Minha Conta</a>
+    <a href="carrinho.html">
+    <img src="img/layout/carrinho.png" width="65">
+    </a>
+</nav>
+
+</header>
+
+<main>
+
+<h1 class="titulo">Minha Conta</h1>
+
+<div class="perfil">
+
+    <div class="form-group">
+        <label>Nome</label>
+        <input type="text" id="nome">
+    </div>
+
+    <div class="form-group">
+        <label>E-mail</label>
+        <input type="email" id="email">
+    </div>
+
+    <div class="form-group">
+        <label>Senha atual (só para trocar a senha)</label>
+        <input type="password" id="senhaAtual" autocomplete="current-password">
+    </div>
+
+    <div class="form-group">
+        <label>Nova senha (deixe em branco para manter)</label>
+        <input type="password" id="novaSenha" autocomplete="new-password">
+    </div>
+
+    <div class="button-area">
+
+        <button onclick="salvarAlteracoes()">
+            Salvar alterações
+        </button>
+
+        <button onclick="sair()">
+            Sair
+        </button>
+
+        <button class="delete-btn" onclick="excluirConta()">
+            Excluir conta
+        </button>
+
+    </div>
+
+</div>
+
+</main>
+
+<footer>
+
+    Sapato Velho
+
+    <br><br>
+
+    © 2026 Todos os direitos reservados.
+
+</footer>
+
+</div>
+
+<script src="js/api.js"></script>
+<script>
+
+function irParaLogin() {
+    sessionStorage.setItem("voltarPara", "conta.html");
+    window.location.href = "login.html";
+}
+
+async function carregarConta() {
+
+    if (!estaLogado()) {
+        irParaLogin();
+        return;
+    }
+
+    try {
+        const eu = await api("/usuarios/me");
+        document.getElementById("nome").value = eu.nome;
+        document.getElementById("email").value = eu.email;
+    } catch (erro) {
+        if (erro.status === 401) { irParaLogin(); return; }
+        alert(erro.message);
+    }
+}
+
+async function salvarAlteracoes() {
+
+    try {
+        const resposta = await api("/usuarios/me", {
+            method: "PUT",
+            body: {
+                nome: document.getElementById("nome").value,
+                email: document.getElementById("email").value,
+                senhaAtual: document.getElementById("senhaAtual").value,
+                novaSenha: document.getElementById("novaSenha").value
+            }
+        });
+
+        salvarSessao(resposta.token, resposta.usuario);
+
+        document.getElementById("senhaAtual").value = "";
+        document.getElementById("novaSenha").value = "";
+
+        alert("Dados atualizados com sucesso!");
+
+    } catch (erro) {
+        alert(erro.message);
+    }
+}
+
+async function excluirConta() {
+
+    if (!confirm("Deseja excluir sua conta?")) return;
+
+    try {
+        await api("/usuarios/me", { method: "DELETE" });
+
+        limparSessao();
+        alert("Conta excluída!");
+        window.location.href = "main.html";
+
+    } catch (erro) {
+        alert(erro.message);
+    }
+}
+
+carregarConta();
+
+</script>
+</body>
+</html>

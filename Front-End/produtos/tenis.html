@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Produto - Sapato Velho</title>
+<link rel="icon" href="../img/layout/apenaslogo.png" sizes="512x512" type="imagem/png">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="page-produtos-tenis" data-theme="dark">
+
+<div class="container">
+
+<header>
+<a href="../main.html" class="logo">
+        <img src="../img/layout/apenaslogo.png" alt="logocompleta">
+</a>
+
+    <div class="search">
+
+        <input type="text" placeholder="Pesquisar">
+
+        <a href="produtos.html">
+            <button>⌕</button>
+        </a>
+    </div>
+
+    <nav>
+        <a href="../faleconosco.html">Fale<br>Conosco</a>
+        <a href="../sobre.html">Sobre<br>nós</a>
+        <a href="../login.html"class="login-btn">Entrar</a>
+        <a href="../carrinho.html" class="carrinho carrinho-indicador">
+        <img id="imagemCarrinho"
+             src="../img/layout/carrinho.png"
+             data-vazio="../img/layout/carrinho.png"
+             data-cheio="../img/layout/carrinho-cheio.png"
+             width="65"
+             alt="Carrinho vazio">
+        <span id="contadorCarrinho" class="contador-carrinho">0</span>
+    </a>
+		
+    </nav>
+
+</header>
+
+<section class="product-page">
+
+<div class="gallery">
+
+    <div class="main-image">
+        <img src="../img/produtos/Tenis.jpeg" alt="Allstar Preto">
+    </div>
+
+    <div class="thumbnails">
+
+        <div class="thumb">
+            <img src="../img/produtos/Tenis.jpeg" alt="Allstar Preto">
+        </div>
+
+        <div class="thumb">
+            <img src="../img/produtos/Tenis1.png" alt="Allstar Preto">
+        </div>
+
+        <div class="thumb">
+            <img src="../img/produtos/Tenis2.png" alt="Allstar Preto">
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="product-info">
+
+    <h1>Allstar Preto</h1>
+
+    <p class="description">
+        Marcas de uso.
+    </p>
+
+    <div class="price">
+        R$ 70
+    </div>
+
+<button class="add-cart"
+onclick="adicionarCarrinho(
+'AllStar Preto',
+70,
+'../img/produtos/Tenis.jpeg'
+)">
+Adicionar ao carrinho
+</button>
+
+
+</div>
+
+</section>
+
+</div>
+
+<script src="../js/api.js"></script>
+<script src="../js/carrinho.js"></script>
+</body>
+</html>

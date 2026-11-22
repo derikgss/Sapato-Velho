@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pedido Confirmado - Sapato Velho</title>
+<link rel="icon" href="img/layout/apenaslogo.png" sizes="512x512" type="imagem/png">
+<link rel="stylesheet" href="css/style.css">
+<style>
+.page-checkout .checkout-form { max-width: 480px; margin: 0 auto; text-align: left; }
+.page-checkout .checkout-form label { display: block; margin: 18px 0 6px; color: #ccc; }
+.page-checkout .checkout-form select,
+.page-checkout .checkout-form input {
+    width: 100%; padding: 12px; font-size: 16px; box-sizing: border-box;
+    border: 1px solid var(--cor-texto); background: transparent; color: var(--cor-texto);
+}
+.page-checkout .checkout-form option { color: #000; }
+.page-checkout .checkout-form .home-btn { width: 100%; margin-top: 28px; }
+.page-checkout .checkout-form .home-btn:disabled { opacity: .5; cursor: not-allowed; }
+.page-checkout .resumo-pedido { max-width: 480px; margin: 0 auto 10px; text-align: left; }
+.page-checkout .resumo-linha { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #333; }
+.page-checkout .resumo-total { font-weight: bold; border-bottom: none; }
+</style>
+</head>
+
+<body class="page-checkout" data-theme="dark">
+
+<div class="container">
+
+<header>
+    <a href="main.html" class="logo">
+        <img src="img/layout/apenaslogo.png" alt="Logo">
+    </a>
+
+    <div class="search">
+        <input type="text" placeholder="Pesquisar">
+        <button>⌕</button>
+    </div>
+
+    <nav>
+        <a href="faleconosco.html">Fale<br>Conosco</a>
+        <a href="sobre.html">Sobre<br>Nós</a>
+        <a href="login.html" class="login-btn">Entrar</a>
+        <a href="carrinho.html" class="carrinho carrinho-indicador">
+        <img id="imagemCarrinho"
+             src="img/layout/carrinho.png"
+             data-vazio="img/layout/carrinho.png"
+             data-cheio="img/layout/carrinho-cheio.png"
+             width="65"
+             alt="Carrinho vazio">
+        <span id="contadorCarrinho" class="contador-carrinho">0</span>
+    </a>
+    </nav>
+</header>
+
+<!-- FORMULÁRIO DO PEDIDO -->
+<section class="success-layout" id="secao-pedido">
+    <h1>Finalizar pedido</h1>
+    <p>Confira os itens, escolha a forma de pagamento e o endereço de entrega.</p>
+
+    <div class="resumo-pedido" id="resumo-pedido"></div>
+
+    <form id="formPedido" class="checkout-form">
+        <label for="pagamento">Forma de pagamento</label>
+        <select id="pagamento" required>
+            <option value="PIX">PIX</option>
+            <option value="Cartão de crédito">Cartão de crédito</option>
+            <option value="Cartão de débito">Cartão de débito</option>
+            <option value="Boleto">Boleto</option>
+        </select>
+
+        <label for="endereco">Endereço de entrega</label>
+        <input type="text" id="endereco" maxlength="100" required>
+
+        <button type="submit" class="home-btn" id="btn-confirmar">Confirmar pedido</button>
+    </form>
+</section>
+
+<!-- CONFIRMAÇÃO (aparece depois que a API grava o pedido) -->
+<section class="success-layout" id="secao-sucesso" style="display:none">
+    <div class="success-icon">✓</div>
+    <h1>Pedido Recebido!</h1>
+    <p>
+        Obrigado por comprar no Sapato Velho. Seu pedido foi registrado e já estamos preparando o envio dos seus itens usados com todo carinho.
+    </p>
+
+    <div class="order-number">
+        Código do Pedido: #<span id="codigo-pedido">0000</span>
+    </div>
+
+    <p>Total: <strong id="valor-pedido">R$ 0,00</strong></p>
+
+    <a href="main.html" class="home-btn">
+        Voltar para a Página Inicial
+    </a>
+</section>
+
+<footer>
+    Sapato Velho
+    <br><br>
+    © 2026 Todos os direitos reservados.
+</footer>
+
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/carrinho.js"></script>
+<script>
+const secaoPedido = document.getElementById("secao-pedido");
+const secaoSucesso = document.getElementById("secao-sucesso");
+const formPedido = document.getElementById("formPedido");
+const botaoConfirmar = document.getElementById("btn-confirmar");
+
+function irParaLogin(destino) {
+    sessionStorage.setItem("voltarPara", destino);
+    window.location.href = "login.html";
+}
+
+function mostrarResumo() {
+    const itens = lerCarrinho();
+    let total = 0;
+
+    const linhas = itens.map(item => {
+        total += Number(item.preco);
+        return `<div class="resumo-linha"><span>${escaparHtml(item.nome)}</span><span>${formatarPreco(item.preco)}</span></div>`;
+    });
+
+    linhas.push(`<div class="resumo-linha resumo-total"><span>Total</span><span>${formatarPreco(total)}</span></div>`);
+    document.getElementById("resumo-pedido").innerHTML = linhas.join("");
+}
+
+// Agrupa o carrinho em { produtoId, quantidade }. Itens sem id são procurados pelo nome.
+async function montarItens(carrinho) {
+    const quantidades = new Map();
+    let produtos = null;
+
+    for (const item of carrinho) {
+        let id = item.produtoId;
+
+        if (!id) {
+            if (!produtos) produtos = await api("/produtos");
+            const produto = produtos.find(p => normalizarTexto(p.nome) === normalizarTexto(item.nome));
+            if (!produto) throw new Error('O produto "' + item.nome + '" não está disponível na loja.');
+            id = produto.id;
+        }
+
+        quantidades.set(id, (quantidades.get(id) || 0) + 1);
+    }
+
+    return [...quantidades].map(([produtoId, quantidade]) => ({ produtoId, quantidade }));
+}
+
+formPedido.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    botaoConfirmar.disabled = true;
+
+    try {
+        const itens = await montarItens(lerCarrinho());
+
+        const pedido = await api("/pedidos", {
+            method: "POST",
+            body: {
+                formaPagamento: document.getElementById("pagamento").value,
+                enderecoEntrega: document.getElementById("endereco").value.trim(),
+                itens: itens
+            }
+        });
+
+        localStorage.removeItem("carrinho");
+        atualizarIndicadorCarrinho();
+
+        document.getElementById("codigo-pedido").textContent = pedido.id;
+        document.getElementById("valor-pedido").textContent = formatarPreco(pedido.valorPedido);
+
+        secaoPedido.style.display = "none";
+        secaoSucesso.style.display = "";
+
+    } catch (erro) {
+        if (erro.status === 401) {
+            alert("Sua sessão expirou. Entre novamente.");
+            irParaLogin("checkout.html");
+            return;
+        }
+        alert(erro.message);
+        botaoConfirmar.disabled = false;
+    }
+});
+
+(async function iniciar() {
+    if (!estaLogado()) {
+        irParaLogin("checkout.html");
+        return;
+    }
+
+    if (lerCarrinho().length === 0) {
+        window.location.href = "carrinho.html";
+        return;
+    }
+
+    mostrarResumo();
+
+    try {
+        const eu = await api("/usuarios/me");
+        if (eu.endereco) document.getElementById("endereco").value = eu.endereco.slice(0, 100);
+    } catch (erro) {
+        if (erro.status === 401) irParaLogin("checkout.html");
+    }
+})();
+</script>
+</body>
+</html>

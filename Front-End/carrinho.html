@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrinho - Sapato Velho</title>
+<link rel="icon" href="../img/layout/apenaslogo.png" sizes="512x512" type="imagem/png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="page-carrinho" data-theme="dark">
+
+<div class="container">
+
+<header>
+
+<a href="main.html" class="logo">
+    <img src="img/layout/apenaslogo.png" alt="Logo">
+</a>
+
+<div class="search">
+
+    <input type="text" placeholder="Pesquisar">
+
+    <button>⌕</button>
+
+</div>
+
+<nav>
+
+    <a href="faleconosco.html">
+        Fale<br>Conosco
+    </a>
+
+    <a href="sobre.html">
+        Sobre<br>Nós
+    </a>
+
+    <a href="login.html" class="login-btn">
+        Entrar
+    </a>
+
+    <a href="carrinho.html" class="carrinho carrinho-indicador">
+        <img id="imagemCarrinho"
+             src="img/layout/carrinho.png"
+             data-vazio="img/layout/carrinho.png"
+             data-cheio="img/layout/carrinho-cheio.png"
+             width="65"
+             alt="Carrinho vazio">
+        <span id="contadorCarrinho" class="contador-carrinho">0</span>
+    </a>
+
+</nav>
+
+</header>
+
+<section class="cart-layout">
+
+<!-- PRODUTOS -->
+
+<div class="cart-items">
+
+    <h1>Seu Carrinho</h1>
+
+    <div id="lista"></div>
+
+</div>
+
+<div class="cart-summary">
+
+    <h2>Resumo</h2>
+
+    <div class="summary-line">
+        <span>Subtotal</span>
+        <span id="subtotal">R$ 0</span>
+    </div>
+
+    <div class="summary-line total">
+        <span>Total</span>
+        <span id="total">R$ 0</span>
+    </div>
+
+<button class="finish-btn" id="btn-finalizar" onclick="irParaCheckout()">
+    Finalizar Pedido
+</button>
+
+    </a>
+
+</div>
+
+</section>
+
+<footer class="rodape">
+
+    Sapato Velho
+
+    <br><br>
+
+    © 2026 Todos os direitos reservados.
+
+</footer>
+
+</div>
+
+<script>
+
+
+
+let carrinho =
+JSON.parse(localStorage.getItem("carrinho")) || [];
+
+let lista =
+document.getElementById("lista");
+
+let subtotal = 0;
+
+function carregarCarrinho(){
+
+    lista.innerHTML = "";
+
+    subtotal = 0;
+
+
+
+    if(carrinho.length === 0){
+
+        lista.innerHTML = `
+
+        <div class="empty">
+
+            <h2>Seu carrinho está vazio 🛒</h2>
+
+        </div>
+
+        `;
+
+    }
+
+
+
+    carrinho.forEach((produto,index)=>{
+
+        subtotal += produto.preco;
+
+        lista.innerHTML += `
+
+        <div class="item">
+
+            <img src="${produto.imagem}" alt="${produto.nome}">
+
+            <div class="info">
+
+                <h2>${produto.nome}</h2>
+
+                <p>R$ ${produto.preco}</p>
+
+            </div>
+
+            <button class="remove"
+            onclick="removerProduto(${index})">
+
+                Remover
+
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+
+
+    document.getElementById("subtotal")
+    .innerHTML =
+    "R$ " + subtotal.toFixed(2);
+
+
+
+    document.getElementById("total")
+    .innerHTML =
+    "R$ " + (subtotal).toFixed(2);
+
+}
+
+function removerProduto(index){
+
+    carrinho.splice(index,1);
+
+    localStorage.setItem(
+        "carrinho",
+        JSON.stringify(carrinho)
+    );
+
+    carregarCarrinho();
+    atualizarIndicadorCarrinho();
+
+}
+
+carregarCarrinho();
+atualizarIndicadorCarrinho();
+
+</script>
+
+<script src="js/api.js"></script>
+<script src="js/carrinho.js"></script>
+</body>
+</html>

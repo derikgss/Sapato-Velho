@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entrar - Sapato Velho</title>
+<link rel="icon" href="img/layout/apenaslogo.png" sizes="512x512" type="imagem/png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<script>
+async function login(){
+
+    const email = document.getElementById("email").value.trim();
+    const senha = document.getElementById("senha").value;
+
+    if(email === "" || senha === ""){
+        alert("Preencha e-mail e senha.");
+        return;
+    }
+
+    try{
+
+        const resposta = await api("/usuarios/login", {
+            method: "POST",
+            body: { email: email, senha: senha }
+        });
+
+        salvarSessao(resposta.token, resposta.usuario);
+
+        const destino = sessionStorage.getItem("voltarPara") || "main.html";
+        sessionStorage.removeItem("voltarPara");
+        window.location.href = destino;
+
+    }catch(erro){
+
+        alert(erro.message);
+
+    }
+
+}
+
+document.addEventListener("keydown", function(e){
+    if(e.key === "Enter") login();
+});
+</script>
+
+<body class="page-login" data-theme="dark">
+
+<div class="container">
+
+<header>
+
+<a href="main.html" class="logo">
+        <img src="img/layout/apenaslogo.png" alt="logocompleta">
+</a>
+
+    <div class="search">
+
+        <input type="text" placeholder="Pesquisar">
+
+        <button onclick="window.location.href='produtos.html'">
+            ⌕
+        </button>
+
+    </div>
+
+    <nav>
+        <a href="faleconosco.html">Fale<br>Conosco</a>
+        <a href="sobre.html">Sobre<br>nós</a>
+        <a href="login.html" class="login-btn">Entrar</a>
+        <a href="carrinho.html" class="carrinho carrinho-indicador">
+        <img id="imagemCarrinho"
+             src="img/layout/carrinho.png"
+             data-vazio="img/layout/carrinho.png"
+             data-cheio="img/layout/carrinho-cheio.png"
+             width="65"
+             alt="Carrinho vazio">
+        <span id="contadorCarrinho" class="contador-carrinho">0</span>
+    </a>
+    </nav>
+
+</header>
+
+<main>
+
+<div class="login-box">
+
+    <h1>
+        Entre ou<br>
+        cadastre-se
+    </h1>
+
+    <div class="form-group">
+
+        <label>Login</label>
+
+        <input type="email" id="email">
+
+    </div>
+
+    <div class="form-group">
+
+        <label>Senha</label>
+
+        <input type="password" id="senha">
+
+    </div>
+
+    <button class="login-button" onclick="login()">
+        ENTRAR
+    </button>
+
+    <div class="links">
+
+        <a href="esquecisenha.html">
+            Esqueci minha senha
+        </a>
+
+        <a href="cadastro.html">
+            Criar conta
+        </a>
+
+    </div>
+
+</div>
+
+</main>
+
+<footer class="rodape">
+    Sapato Velho
+    <br><br>
+    © 2026 Todos os direitos reservados.
+</footer>
+
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/carrinho.js"></script>
+</body>
+</html>

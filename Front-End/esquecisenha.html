@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Esqueci minha senha - Sapato Velho</title>
+<link rel="icon" href="img/layout/apenaslogo.png" sizes="512x512" type="imagem/png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="page-esquecisenha" data-theme="dark">
+
+<div class="container">
+
+<header>
+<a href="main.html" class="logo">
+        <img src="img/layout/apenaslogo.png" alt="logocompleta">
+</a>
+
+    <div class="search">
+
+        <input type="text" placeholder="Pesquisar">
+
+        <a href="produtos.html">
+            <button>⌕</button>
+        </a>
+    </div>
+
+    <nav>
+        <a href="faleconosco.html">Fale<br>Conosco</a>
+        <a href="sobre.html">Sobre<br>nós</a>
+        <a href="login.html"class="login-btn">Entrar</a>
+        <a href="carrinho.html" class="carrinho carrinho-indicador">
+        <img id="imagemCarrinho"
+             src="img/layout/carrinho.png"
+             data-vazio="img/layout/carrinho.png"
+             data-cheio="img/layout/carrinho-cheio.png"
+             width="65"
+             alt="Carrinho vazio">
+        <span id="contadorCarrinho" class="contador-carrinho">0</span>
+    </a>
+    </nav>
+
+</header>
+
+<main>
+
+<div class="recovery-box">
+
+    <h1>Esqueci minha senha</h1>
+
+    <p class="description">
+        Insira seu e-mail, que iremos auxiliar
+        com a recuperação de sua senha.
+    </p>
+
+    <div class="form-group">
+        <label>E-mail</label>
+        <input type="email">
+    </div>
+
+    <div class="button-area">
+        <button>Enviar</button>
+    </div>
+
+</div>
+
+</main>
+
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/carrinho.js"></script>
+</body>
+</html>

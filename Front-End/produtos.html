@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Produtos - Sapato Velho</title>
+<link rel="icon" href="img/layout/apenaslogo.png" sizes="512x512" type="imagem/png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="page-produtos" data-theme="dark">
+
+<div class="container">
+
+<header>
+
+     <a href="main.html" class="logo">
+        <img src="img/layout/apenaslogo.png" alt="logocompleta">
+</a>
+
+    <div class="search">
+
+        <input type="text" placeholder="Pesquisar">
+
+        <a href="produtos.html">
+            <button>⌕</button>
+        </a>
+    </div>
+
+    <nav>
+        <a href="faleconosco.html">Fale<br>Conosco</a>
+        <a href="sobre.html">Sobre<br>nós</a>
+        <a href="login.html" class="login-btn">Entrar</a>
+        <a href="carrinho.html" class="carrinho carrinho-indicador">
+        <img id="imagemCarrinho"
+             src="img/layout/carrinho.png"
+             data-vazio="img/layout/carrinho.png"
+             data-cheio="img/layout/carrinho-cheio.png"
+             width="65"
+             alt="Carrinho vazio">
+        <span id="contadorCarrinho" class="contador-carrinho">0</span>
+    </a>
+    </nav>
+
+</header>
+
+<h1 class="page-title">Produtos</h1>
+
+<p class="page-description">
+Confira nossa coleção de produtos usados,
+selecionados com cuidado para oferecer qualidade
+e economia.
+</p>
+
+<section class="products" id="lista-produtos">
+    <p>Carregando produtos...</p>
+</section>
+
+
+<footer class="rodape">
+    natan.maxwell@gmail.com
+    <br><br>
+    © 2026 Todos os direitos reservados.
+</footer>
+
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/carrinho.js"></script>
+<script>
+const PAGINAS_DE_PRODUTO = {
+    "console snes": "produtos/snes.html",
+    "livro css na web": "produtos/livro.html",
+    "caixa de ferramentas": "produtos/caixa.html",
+    "allstar preto": "produtos/tenis.html"
+};
+
+let produtosDaLoja = [];
+const listaProdutos = document.getElementById("lista-produtos");
+
+function cartaoDoProduto(p) {
+    const pagina = PAGINAS_DE_PRODUTO[normalizarTexto(p.nome)];
+    const nome = escaparHtml(p.nome);
+    const titulo = pagina ? `<a href="${pagina}">${nome}</a>` : nome;
+    const esgotado = Number(p.estoque) <= 0;
+
+    return `
+    <div class="card" data-produto="${nome}">
+        <div class="image">
+            <img src="${escaparHtml(p.imagem)}" alt="${nome}">
+        </div>
+        <div class="info">
+            <h3>${titulo}</h3>
+            <div class="price">${formatarPreco(p.preco)}</div>
+            <button class="add-cart" data-id="${p.id}" ${esgotado ? "disabled" : ""}>
+                ${esgotado ? "Esgotado" : "Adicionar ao carrinho"}
+            </button>
+        </div>
+    </div>`;
+}
+
+async function carregarProdutos() {
+    try {
+        produtosDaLoja = await api("/produtos");
+
+        listaProdutos.innerHTML = produtosDaLoja.length
+            ? produtosDaLoja.map(cartaoDoProduto).join("")
+            : "<p>Nenhum produto disponível no momento.</p>";
+    } catch (erro) {
+        listaProdutos.innerHTML = "<p>" + escaparHtml(erro.message) + "</p>";
+    }
+}
+
+listaProdutos.addEventListener("click", function (e) {
+    const botao = e.target.closest(".add-cart");
+    if (!botao) return;
+
+    const produto = produtosDaLoja.find(p => p.id === Number(botao.dataset.id));
+    if (produto) adicionarCarrinho(produto.nome, produto.preco, produto.imagem, produto.id);
+});
+
+carregarProdutos();
+</script>
+</body>
+</html>

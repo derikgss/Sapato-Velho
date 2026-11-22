@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contato - Sapato Velho</title>
+<link rel="icon" href="img/layout/apenaslogo.png" sizes="512x512" type="imagem/png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="page-faleconosco" data-theme="dark">
+
+<div class="container">
+
+<header>
+
+    <a href="main.html" class="logo">
+        <img src="img/layout/apenaslogo.png" alt="logocompleta">
+</a>
+
+    <div class="search">
+
+        <input type="text" placeholder="Pesquisar">
+
+        <button onclick="window.location.href='produtos.html'">
+            ⌕
+        </button>
+
+    </div>
+
+    <nav>
+        <a href="faleconosco.html">Fale<br>Conosco</a>
+        <a href="sobre.html">Sobre<br>nós</a>
+        <a href="login.html" class="login-btn">Entrar</a>
+        <a href="carrinho.html" class="carrinho carrinho-indicador">
+        <img id="imagemCarrinho"
+             src="img/layout/carrinho.png"
+             data-vazio="img/layout/carrinho.png"
+             data-cheio="img/layout/carrinho-cheio.png"
+             width="65"
+             alt="Carrinho vazio">
+        <span id="contadorCarrinho" class="contador-carrinho">0</span>
+    </a>
+    </nav>
+
+</header>
+
+<section class="hero">
+
+    <h1>Fale Conosco</h1>
+
+    <p>
+        Caso tenha dúvidas, sugestões ou problemas com pedidos,
+        nossa equipe está pronta para ajudar.
+    </p>
+
+</section>
+
+<section class="contact">
+
+<div class="form">
+
+    <div class="form-group">
+        <label>Nome*</label>
+        <input type="text">
+    </div>
+
+    <div class="form-group">
+        <label>E-mail*</label>
+        <input type="email">
+    </div>
+
+    <div class="form-group">
+        <label>Telefone*</label>
+        <input type="text">
+    </div>
+
+    <div class="form-group">
+        <label>Número do Pedido</label>
+        <input type="text">
+    </div>
+
+    <div class="form-group">
+        <label>Assunto*</label>
+        <textarea></textarea>
+    </div>
+
+    <button>Enviar</button>
+
+</div>
+
+<div class="info">
+
+    <div class="info-box">
+        <h2>Telefone para contato</h2>
+        <p>(11) 99467-4217</p>
+    </div>
+
+    <div class="info-box">
+        <h2>Localização</h2>
+        <p>
+            Estamos localizados na Av. Amazonas da Silva,
+            737, São Paulo, SP.
+        </p>
+    </div>
+
+    <div class="info-box">
+        <h2>Horário de funcionamento</h2>
+        <p>
+            Segunda à Sexta das 8h às 17h.
+            Fechado aos sábados, domingos e feriados.
+        </p>
+    </div>
+
+    <div class="map">
+        <img src="img/layout/map.png" alt="Mapa">
+    </div>
+
+</div>
+
+</section>
+
+<footer class="rodape">
+    Sapato Velho
+    <br><br>
+    © 2026 Todos os direitos reservados.
+</footer>
+
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/carrinho.js"></script>
+</body>
+</html>
