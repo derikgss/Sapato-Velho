@@ -20,3 +20,5 @@ secrets.json
 .DS_Store
 Thumbs.db
 desktop.ini
+
+**/appsettings.Development.json
