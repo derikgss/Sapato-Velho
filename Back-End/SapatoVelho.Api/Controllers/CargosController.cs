@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SapatoVelho.Api.Data;
@@ -7,23 +8,9 @@ namespace SapatoVelho.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CargosController : ControllerBase
+public class CargosController(AppDbContext db) : ControllerBase
 {
-    private readonly AppDbContext _context;
-
-    public CargosController(AppDbContext context)
-    {
-        _context = context;
-    }
-
-    // GET: api/cargos
+    [Authorize(Roles = "Admin")]
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Cargo>>> Listar()
-    {
-        var cargos = await _context.Cargos
-            .AsNoTracking()
-            .ToListAsync();
-
-        return Ok(cargos);
-    }
+    public async Task<ActionResult<IEnumerable<Cargo>>> Listar() => Ok(await db.Cargos.AsNoTracking().OrderBy(c => c.Id).ToListAsync());
 }

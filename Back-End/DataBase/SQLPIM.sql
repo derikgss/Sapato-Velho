@@ -1,3 +1,5 @@
+-- ARQUIVO LEGADO / HISTORICO: NAO EXECUTE INDIVIDUALMENTE.
+-- Use exclusivamente SapatoVelhoDB_Consolidado.sql no banco criado pelo provedor.
 -- 1. Cria o banco de dados do projeto Sapato Velho
 CREATE DATABASE SapatoVelhoDB;
 GO

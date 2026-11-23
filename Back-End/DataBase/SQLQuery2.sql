@@ -1,3 +1,5 @@
+-- ARQUIVO LEGADO / HISTORICO: NAO EXECUTE INDIVIDUALMENTE.
+-- Use exclusivamente SapatoVelhoDB_Consolidado.sql no banco criado pelo provedor.
 CREATE TABLE Pedidos(
     ID INT IDENTITY(1,1) PRIMARY KEY,
     UsuariosID INT NOT NULL,

@@ -1,3 +1,5 @@
+-- ARQUIVO LEGADO / HISTORICO: NAO EXECUTE INDIVIDUALMENTE.
+-- Use exclusivamente SapatoVelhoDB_Consolidado.sql no banco criado pelo provedor.
 CREATE TABLE tipo_usuario (
     ID INT IDENTITY(1,1) PRIMARY KEY,
     Nome VARCHAR(50) NOT NULL UNIQUE   -- Admin, Funcionario, Cliente

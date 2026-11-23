@@ -1,6 +1,9 @@
 // ===== Sapato Velho - ligação com a API (.NET) =====
-// Se a API rodar em outra porta, troque só esta linha.
-const API_URL = "http://localhost:5141/api";
+// Desenvolvimento local usa localhost. Antes de publicar no GitHub Pages,
+// substitua o domínio abaixo pelo endereço HTTPS real do website ASP.NET no MonsterASP.
+const API_URL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+    ? "http://localhost:5141/api"
+    : "https://SEU-SITE-DA-API/api";
 
 // ---------- sessão (token JWT) ----------
 function lerToken() {

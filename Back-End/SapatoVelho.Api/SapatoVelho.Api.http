@@ -1,11 +1,14 @@
 @SapatoVelho.Api_HostAddress = http://localhost:5141
 
-GET {{SapatoVelho.Api_HostAddress}}/openapi/v1.json
+### Status da API
+GET {{SapatoVelho.Api_HostAddress}}/
 Accept: application/json
 
-###
-
-GET {{SapatoVelho.Api_HostAddress}}/weatherforecast/
+### Produtos públicos
+GET {{SapatoVelho.Api_HostAddress}}/api/produtos
 Accept: application/json
 
-###
+### Cargos (exige token Admin)
+GET {{SapatoVelho.Api_HostAddress}}/api/cargos
+Accept: application/json
+Authorization: Bearer COLE_SEU_TOKEN_AQUI
