@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadastrar produto - Sapato Velho</title>
+<link rel="icon" href="img/layout/apenaslogo.png" sizes="512x512" type="image/png">
+<link rel="stylesheet" href="css/style.css">
+<style>
+.page-cadastro .aviso{max-width:900px;margin:0 auto 30px;text-align:center;font-size:18px}
+.page-cadastro .aviso a{color:#fff}
+.page-cadastro .aviso.erro{border:1px solid #fff;padding:14px}
+.page-cadastro select{height:42px;border:1px solid #fff;background:#050505;color:#fff;padding:0 10px}
+.page-cadastro .form-group input[type=number]{width:100%}
+.page-cadastro .abas{display:flex;justify-content:center;gap:14px;margin-bottom:40px}
+.page-cadastro .abas button,.page-cadastro .tabela button,.page-cadastro .barra a{padding:10px 18px;border:1px solid #fff;background:transparent;color:#fff;cursor:pointer;font-size:15px;border-radius:8px;transition:.3s;text-decoration:none}
+.page-cadastro .abas button.ativa,.page-cadastro .abas button:hover,.page-cadastro .tabela button:hover,.page-cadastro .barra a:hover{background:#fff;color:#000}
+.page-cadastro .barra{max-width:900px;margin:0 auto 25px;display:flex;justify-content:flex-end}
+.page-cadastro .tabela{width:100%;max-width:900px;margin:0 auto;border-collapse:collapse}
+.page-cadastro .tabela th,.page-cadastro .tabela td{border-bottom:1px solid #444;padding:12px 8px;text-align:left;font-size:15px}
+.page-cadastro .tabela input{width:90px;height:34px;border:1px solid #fff;background:transparent;color:#fff;padding:4px 8px}
+.page-cadastro .tabela img{width:42px;height:42px;object-fit:cover;vertical-align:middle;margin-right:10px}
+.page-cadastro .previa{max-width:160px;max-height:160px;margin-top:10px;display:none}
+.page-cadastro .dica{font-size:14px;color:#bbb}
+.page-cadastro .tabela-rolagem{overflow-x:auto}
+@media(max-width:700px){.page-cadastro main{padding:40px 16px}.page-cadastro .page-title{font-size:38px;margin-bottom:40px}.page-cadastro .form-grid{grid-template-columns:1fr;gap:35px}}
+</style>
+</head>
+<body class="page-cadastro" data-theme="dark">
+<div class="container">
+<header>
+<a href="main.html" class="logo"><img src="img/layout/apenaslogo.png" alt="logocompleta"></a>
+<div class="search">
+    <input type="text" placeholder="Pesquisar">
+    <a href="produtos.html"><button>⌕</button></a>
+</div>
+<nav>
+    <a href="faleconosco.html">Fale<br>Conosco</a>
+    <a href="sobre.html">Sobre<br>nós</a>
+    <a href="login.html" class="login-btn">Entrar</a>
+    <a href="carrinho.html" class="carrinho carrinho-indicador">
+        <img id="imagemCarrinho" src="img/layout/carrinho.png" data-vazio="img/layout/carrinho.png" data-cheio="img/layout/carrinho-cheio.png" width="65" alt="Carrinho vazio">
+        <span id="contadorCarrinho" class="contador-carrinho">0</span>
+    </a>
+</nav>
+</header>
+<main>
+<h1 class="page-title">Cadastrar produto</h1>
+<p id="aviso" class="aviso" hidden></p>
+<form id="formProduto" hidden>
+ <div class="form-grid">
+  <div class="form-column">
+   <div class="form-group"><label for="nome">Nome</label><input type="text" id="nome" maxlength="100" required></div>
+   <div class="form-group"><label for="preco">Preço (R$)</label><input type="number" id="preco" min="0.01" step="0.01" required></div>
+   <div class="form-group"><label for="estoque">Estoque</label><input type="number" id="estoque" min="0" step="1" value="1" required></div>
+  </div>
+  <div class="form-column">
+   <div class="form-group">
+    <label for="imagem">Imagem</label>
+    <input type="text" id="imagem" maxlength="255" placeholder="img/produtos/meu-produto.jpeg" required>
+    <span class="dica">Coloque o arquivo em Front-End/img/produtos, envie ao GitHub e escreva aqui o caminho dele.</span>
+    <img id="previa" class="previa" alt="Prévia da imagem">
+   </div>
+  </div>
+ </div>
+ <div class="button-area"><button type="submit">Cadastrar produto</button></div>
+</form>
+<p class="aviso" style="margin-top:40px"><a href="admin.html">Voltar ao painel</a></p>
+</main>
+</div>
+<script src="js/api.js"></script>
+<script src="js/carrinho.js"></script>
+<script>
+function cargoAtual() {
+    const dados = dadosDoToken(lerToken() || "") || {};
+    return dados.role || dados["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] || (lerUsuario() || {}).cargo || "";
+}
+const aviso = document.getElementById("aviso");
+const form = document.getElementById("formProduto");
+
+if (!estaLogado()) {
+    aviso.hidden = false;
+    aviso.innerHTML = 'Entre com uma conta de administrador para cadastrar produtos. <a href="login.html">Ir para o login</a>';
+} else if (!["Admin", "Funcionario"].includes(cargoAtual())) {
+    aviso.hidden = false;
+    aviso.classList.add("erro");
+    aviso.textContent = "Sua conta não tem permissão para cadastrar produtos.";
+} else {
+    form.hidden = false;
+}
+
+const previa = document.getElementById("previa");
+document.getElementById("imagem").addEventListener("input", function () {
+    previa.style.display = this.value.trim() ? "block" : "none";
+    previa.src = this.value.trim();
+});
+previa.addEventListener("error", () => { previa.style.display = "none"; });
+
+form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    const dados = {
+        nome: document.getElementById("nome").value.trim(),
+        preco: Number(document.getElementById("preco").value),
+        estoque: parseInt(document.getElementById("estoque").value, 10),
+        imagem: document.getElementById("imagem").value.trim()
+    };
+    try {
+        const criado = await api("/produtos", { method: "POST", body: dados });
+        alert('Produto "' + criado.nome + '" cadastrado com sucesso!');
+        form.reset();
+        previa.style.display = "none";
+    } catch (erro) {
+        alert(erro.message);
+    }
+});
+</script>
+</body>
+</html>
