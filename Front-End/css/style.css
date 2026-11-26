@@ -333,6 +333,11 @@ body {
     padding:12px 22px;
 }
 
+.page-main .admin-btn {
+    border:1px solid #fff;
+    padding:12px 22px;
+}
+
 .page-main .hero {
     text-align:center;
     padding:90px 25px;
