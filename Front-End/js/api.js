@@ -3,7 +3,7 @@
 // substitua o domínio abaixo pelo endereço HTTPS real do website ASP.NET no MonsterASP.
 const API_URL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
     ? "http://localhost:5141/api"
-    : "https://SEU-SITE-DA-API/api";
+    : "https://sapatovelho.runasp.net/api";
 
 // ---------- sessão (token JWT) ----------
 function lerToken() {
